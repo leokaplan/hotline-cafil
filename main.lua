@@ -25,6 +25,8 @@ function love.load()
     lightWorld = love.light.newWorld()
     map.light(lightWorld)
     player.light(lightWorld)    
+    lightWorld.setAmbientColor(150, 130, 31)
+    love.keyboard.setKeyRepeat( true )
     
 
     spawner = cron.every(1,function() if #enemies < numenemies then table.insert(enemies,Enemy:new()) end end)
@@ -33,8 +35,6 @@ function love.load()
 
     -- debug
     if false then
-        love.keyboard.setKeyRepeat( true )
-        lightWorld.setAmbientColor(15, 15, 31) -- optional
     end
     
     -- variaveis de estado    
@@ -46,7 +46,7 @@ function love.load()
     started = false
     
     
-    instructions = "find the exit, don't die.\n'a' to move your left leg, 'd' to move your right leg.\nmouse moves your direction\nRemember: you can't see the enemy, just its shadow"
+    instructions = "hi"
     
     exit = {}
     exit.x,exit.y = map.safeR()
@@ -81,11 +81,6 @@ function love.update(dt)
         T["blocked"] = 0
         blocked = false
     end
-    local x = love.mouse.getX()-(player.x+0.5)*tilesize
-    local y = love.mouse.getY()-(player.y+0.5)*tilesize
-    if y == 0 then y = 1 end
-    local degrees = math.atan2(-x,-y)
-    lightMouse.setDirection(degrees)--math.cos(love.mouse.getX())+math.sin(love.mouse.getY())) -- optional
     T["blocked"] = T["blocked"]+dt
     
 end
